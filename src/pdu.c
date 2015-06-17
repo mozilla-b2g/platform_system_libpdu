@@ -84,6 +84,14 @@ read_pdu_at_va(const struct pdu* pdu, unsigned long offset,
         dst = va_arg(ap, uint64_t*);
         len = sizeof(uint64_t);
         break;
+      case 'f': /* 32-bit floating point */
+        dst = va_arg(ap, float*);
+        len = sizeof(float);
+        break;
+      case 'd': /* 64-bit floating point */
+        dst = va_arg(ap, double*);
+        len = sizeof(double);
+        break;
       case 'm': /* raw memory + length */
         dst = va_arg(ap, void*);
         len = va_arg(ap, size_t);
@@ -153,6 +161,8 @@ write_pdu_at_va(struct pdu* pdu, unsigned long offset, const char* fmt,
   uint32_t I;
   int64_t l;
   uint64_t L;
+  float f;
+  double d;
   const void* src;
   const void* chr;
   size_t len;
@@ -198,6 +208,16 @@ write_pdu_at_va(struct pdu* pdu, unsigned long offset, const char* fmt,
         L = va_arg(ap, uint64_t);
         src = &L;
         len = sizeof(L);
+        break;
+      case 'f': /* 32-bit floating point */
+        f = (float)va_arg(ap, double);
+        src = &f;
+        len = sizeof(f);
+        break;
+      case 'd': /* 64-bit floating point */
+        d = va_arg(ap, double);
+        src = &d;
+        len = sizeof(d);
         break;
       case 'm': /* raw memory + length */
       case 'M': /* raw memory + length */

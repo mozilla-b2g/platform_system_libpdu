@@ -54,6 +54,8 @@
  *        'I'     | unsigned 32 bit
  *        'l'     | signed 64 bit
  *        'L'     | unsigned 64 bit
+ *        'f'     | 32-bit floating point
+ *        'd'     | 64-bit floating point
  *        'm'     | raw memory
  *        'M'     | raw memory
  *        '0'     | raw 0-terminated memory
