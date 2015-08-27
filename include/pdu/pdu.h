@@ -66,6 +66,28 @@
  * PDU. The caller is responsible for freeing the memory with |free|.
  */
 
+#define PDU_BYTE_WIDTH (8) /* bits per byte in a PDU */
+
+#define PDU_HEADER_SERVICE_SIZE (1) /* size of the service field in bytes */
+#define PDU_HEADER_OPCODE_SIZE  (1) /* size of the opcode field in bytes */
+#define PDU_HEADER_LENGTH_SIZE  (2) /* size of the length field in bytes */
+
+/* PDU header size in bytes */
+#define PDU_HEADER_SIZE \
+  (PDU_HEADER_SERVICE_SIZE + PDU_HEADER_OPCODE_SIZE + PDU_HEADER_LENGTH_SIZE)
+
+/* maximum PDU data size in bytes */
+#define PDU_MAX_DATA_LENGTH (1ul << (PDU_HEADER_LENGTH_SIZE * PDU_BYTE_WIDTH))
+
+/* maximum PDU size in bytes */
+#define PDU_MAX_LENGTH  (PDU_HEADER_SIZE + PDU_MAX_DATA_LENGTH)
+
+/* maximum service id in a PDU */
+#define PDU_MAX_NUM_SERVICES (1ul << (PDU_HEADER_SERVICE_SIZE * PDU_BYTE_WIDTH))
+
+/* maximum opcode in a PDU */
+#define PDU_MAX_NUM_OPCODES (1ul << (PDU_HEADER_OPCODE_SIZE * PDU_BYTE_WIDTH))
+
 struct pdu {
   uint8_t service;
   uint8_t opcode;
