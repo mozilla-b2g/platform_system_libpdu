@@ -39,7 +39,7 @@ err_malloc:
 }
 
 void
-cleanup_pdu_rbuf(struct pdu_rbuf* rbuf)
+destroy_pdu_rbuf(struct pdu_rbuf* rbuf)
 {
   /* |free| can deal with null pointers, but it's
    * certainly an error to pass one here.
@@ -93,9 +93,10 @@ err_malloc:
 }
 
 void
-cleanup_pdu_wbuf(struct pdu_wbuf* wbuf)
+destroy_pdu_wbuf(struct pdu_wbuf* wbuf)
 {
   assert(wbuf);
+
   free(wbuf);
 }
 
@@ -139,9 +140,9 @@ send_pdu_wbuf(struct pdu_wbuf* wbuf, int fd, int flags)
     return -1;
   }
 
-  /* File-descriptor transfers create a new reference to
-   * the underlying open file description. We cleanup ours
-   * here, so we won't leak resources.
+  /* File-descriptor transfers create a new reference to the
+   * underlying open file description. We clean up ours here,
+   * so we won't leak resources.
    */
 
   chdr = CMSG_FIRSTHDR(&msg);

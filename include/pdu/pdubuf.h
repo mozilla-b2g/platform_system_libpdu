@@ -52,7 +52,7 @@ struct pdu_rbuf*
 create_pdu_rbuf(unsigned long maxdatalen);
 
 void
-cleanup_pdu_rbuf(struct pdu_rbuf* rbuf);
+destroy_pdu_rbuf(struct pdu_rbuf* rbuf);
 
 int
 pdu_rbuf_has_pdu_hdr(const struct pdu_rbuf* rbuf);
@@ -80,7 +80,7 @@ create_pdu_wbuf(unsigned long maxdatalen, unsigned long taillen,
                 int (*build_ancillary_data)(struct pdu_wbuf*, struct msghdr*));
 
 void
-cleanup_pdu_wbuf(struct pdu_wbuf* wbuf);
+destroy_pdu_wbuf(struct pdu_wbuf* wbuf);
 
 ssize_t
 send_pdu_wbuf(struct pdu_wbuf* wbuf, int fd, int flags);
