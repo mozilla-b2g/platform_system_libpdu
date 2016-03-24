@@ -19,6 +19,7 @@
 #define LOG_TAG "libpdu"
 
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <utils/Log.h>
 
